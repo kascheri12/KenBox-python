@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title_content %}
+    <h1>{% block title %} KenBox Exercise {% endblock %}</h1>
+{% endblock %}
+
+{% block frm_submit %}
+<div class="p-4">
+  <form method="POST" action="/" name="frm-submit" id="frm-submit">
+    <div class="input-group input-group-lg p-4">
+      <span class="input-group-text" id="inputGroup-sizing-lg">Number of Children</span>
+      <input type="number" title="Children" id="children" placeholder="" name="children" class="form-control" aria-label="Number of child boxes to create" value="{{ children|safe }}" required>
+    </div>
+
+    <div class="input-group input-group-lg p-4">
+      <button type="submit" class="btn btn-primary" id="btn-submit">Go</button>
+    </div>
+
+  </form>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="p-4">
+  <p class="px-4">
+    <span class="fs-2 fw-bold">{{ results|safe }}</span>
+  </p>
+</div>
+{% endblock %}
