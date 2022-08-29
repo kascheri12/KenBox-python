@@ -4,26 +4,75 @@
     <h1>{% block title %} KenBox Exercise {% endblock %}</h1>
 {% endblock %}
 
-{% block frm_submit %}
-<div class="p-4">
-  <form method="POST" action="/" name="frm-submit" id="frm-submit">
-    <div class="input-group input-group-lg p-4">
-      <span class="input-group-text" id="inputGroup-sizing-lg">Number of Children</span>
-      <input type="number" title="Children" id="children" placeholder="" name="children" class="form-control" aria-label="Number of child boxes to create" value="{{ children|safe }}" required>
-    </div>
-
-    <div class="input-group input-group-lg p-4">
-      <button type="submit" class="btn btn-primary" id="btn-submit">Go</button>
-    </div>
-
-  </form>
-</div>
-{% endblock %}
-
 {% block content %}
 <div class="p-4">
-  <p class="px-4">
-    <span class="fs-2 fw-bold">{{ results|safe }}</span>
+  <p class="p-2">
+    <span class="fs-2 fw-bold">This exmaple illistrates how much faster it is to count the number of children in the KenBox Example using the iterative vs the recursive methods.</span>
+  </p>
+  <p class="p-2">
+    <span class="fs-2 fw-bold">{{'%0.4f' % perc_faster|float }}% faster</span>
+  </p>
+  <p class="p-2">
+    <table class="table fs-2">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Recursive</th>
+          <th scope="col">Iterative</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Number of children</th>
+          <td>{{ children_recur|safe }}</td>
+          <td>{{ children_iter|safe }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Execution time</th>
+          <td>{{ time_recur|safe }}</td>
+          <td>{{ time_iter|safe }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </p>
+  <p class="p-2">
+    <table class="table table-borderless fs-5">
+      <thead>
+        <tr>
+          <th scope="col">Recursive</th>
+          <th scope="col">Iterative</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <pre>
+def getChildBoxRecurse(self,box):
+    if (box.containedBox is not None):
+        return self.getChildBoxRecurse(box.containedBox) + 1
+    return 0
+
+def getNumberOfChildBoxesRecursive(self):
+    return self.getChildBoxRecurse(self)
+            </pre>
+          </td>
+          <td>
+            <pre>
+def getNumberOfChildBoxesIterative(self):
+    i = 0
+    child = self.containedBox
+    while (child is not None):
+        i += 1
+        if (child.containedBox is not None):
+            child = child.containedBox
+        else:
+            child = None
+    return i
+            </pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </p>
 </div>
 {% endblock %}
