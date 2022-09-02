@@ -3,9 +3,12 @@ from datetime import datetime
 class KenBox:
     
     containedBox=None
+    childrenCount=0
     
     def __init__(self,box=None):
         self.containedBox = box
+        if (box is KenBox):
+            self.childrenCount = box.childrenCount + 1
     
     def getChildBoxRecurse(self,box):
         if (box.containedBox is not None):
@@ -25,3 +28,6 @@ class KenBox:
             else:
                 child = None
         return i
+
+    def getNumberOfChildBoxesCounter(self):
+        return childrenCount

@@ -11,17 +11,24 @@ app = Flask(__name__)
 def index():
     children = None
     
-    myKenBox = KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox())))))))))))))))))))))))))))))))))))))))))
     start_recursive = time.time()
+    myKenBox = KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox())))))))))))))))))))))))))))))))))))))))))
     children_recur = myKenBox.getNumberOfChildBoxesRecursive()
     end_recursive = time.time()
     
     start_iterative = time.time()
-    children_iter = myKenBox.getNumberOfChildBoxesIterative()
+    myOtherKenBox = KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox())))))))))))))))))))))))))))))))))))))))))
+    children_iter = myOtherKenBox.getNumberOfChildBoxesIterative()
     end_iterative = time.time()
+    
+    start_counter = time.time()
+    myThirdKenBox = KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox(KenBox())))))))))))))))))))))))))))))))))))))))))
+    children_counter = myThirdKenBox.getNumberOfChildBoxesIterative()
+    end_counter = time.time()
     
     time_recur = (end_recursive - start_recursive)
     time_iter = (end_iterative - start_iterative)
+    time_counter = (end_counter - start_counter)
     perc_faster = (time_recur - time_iter) / time_iter * 100
     
     results = {
@@ -29,6 +36,8 @@ def index():
         'time_recur': end_recursive - start_recursive,
         'children_iter': children_iter,
         'time_iter': end_iterative - start_iterative,
+        'children_counter': children_counter,
+        'time_counter': time_counter,
         'perc_faster': perc_faster
     }
     return render_template('index.html'
@@ -36,6 +45,8 @@ def index():
                 ,time_recur=time_recur
                 ,children_iter=children_iter
                 ,time_iter=time_iter
+                ,children_counter=children_counter
+                ,time_counter=time_counter
                 ,perc_faster=perc_faster
                 ,results=results)
 
